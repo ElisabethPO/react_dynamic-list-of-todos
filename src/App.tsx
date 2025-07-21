@@ -21,11 +21,15 @@ export const App: React.FC = () => {
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const [filter, setFilter] = useState<'all' | 'completed' | 'active'>('all');
   const [query, setQuery] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const loadAllTodos = () => {
     setTodosLoading(true);
+    setError(null);
+
     getTodos()
       .then(setTodos)
+      .catch(() => setError('Failed to load todos:'))
       .finally(() => setTodosLoading(false));
   };
 
@@ -109,3 +113,7 @@ export const App: React.FC = () => {
     </>
   );
 };
+
+function setError(arg0: string) {
+  throw new Error('Function not implemented.');
+}
